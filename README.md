@@ -29,7 +29,7 @@ at the end of the file add the following
 
 ```
 interface eth0
-        static ip_address=192.168.0.5/24 # < change the static IP as per your desire
+        static ip_address=192.168.0.10/24 # < change the static IP as per your desire
         static routers=192.168.0.1 # this is router IP
         static domain_name_servers=1.1.1.1 1.0.0.1
 ```
@@ -101,5 +101,20 @@ sudo docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart=always -
 sudo apt install git -y
 ```
 
-Clone repo 
+Clone repo <repolink>
 
+# Installing apps
+
+## Adguard-home
+
+cd `adguard-home`
+
+docker-compose up -d
+
+once adguard-home is up and running go to `http://192.168.0.10:3000`
+
+complete the initial setup, hereafter visit `http://192.168.0.10` to access Adguard-home
+
+### Enable DHCP
+
+Click Settings > DHCP settings
