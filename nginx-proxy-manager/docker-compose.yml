@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx_proxy_app
+    ports:
+      - '8080:80'
+      - '81:81'
+      - '443:443'
+    environment:
+      DB_SQLITE_FILE: "/data/npm.sqlite"
+    volumes:
+      - /portainer/Files/AppData/Config/npm/config.json:/app/config/production.json
+      - /portainer/Files/AppData/Config/npm/data:/data
+      - /portainer/Files/AppData/Config/npm/letsencrypt:/etc/letsencrypt
+    restart: always
+  db:
+    #image: 'yobasystems/alpine-mariadb:latest'                      # for armhf
+    image: linuxserver/mariadb:latest   #arm64v8/mariadb:10.5
+    container_name: nginx_proxy_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 'Alt3rMys0p#N'                  # Change this
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: 'Alt3rMys0p#N'                                   # Change this
+    volumes:
+      - /portainer/Files/AppData/Config/npm/mariadb/data/mysql:/var/lib/mysql
+    restart: always
